@@ -96,7 +96,7 @@ packages:
     source: sdk
     version: "0.0.0"
   fzn_responsive_web:
-    dependency: "direct overridden"
+    dependency: "direct dev"
     description:
       path: "../fzn_responsive_web"
       relative: true
