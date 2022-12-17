@@ -15,26 +15,38 @@ class MyApp extends StatelessWidget {
     // );
     return MaterialApp(
       title: 'Flutter Demo',
-      home: HomePage(),
+      home: const HomePage(),
       onGenerateRoute: (settings) {
         debugPrint("[onGenerateRoute] settings name ${settings.name}");
         if (settings.name == "/home") {
           return PageRouteBuilder(
-              settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
-              pageBuilder: (_, __, ___) => HomePage(),
-              transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c));
+            settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
+            pageBuilder: (_, __, ___) => const HomePage(),
+            transitionsBuilder: (_, a, __, c) => FadeTransition(
+              opacity: a,
+              child: c,
+            ),
+          );
         }
         if (settings.name == "/secondpage") {
           return PageRouteBuilder(
-              settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
-              pageBuilder: (_, __, ___) => SecondPage(),
-              transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c));
+            settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
+            pageBuilder: (_, __, ___) => const SecondPage(),
+            transitionsBuilder: (_, a, __, c) => FadeTransition(
+              opacity: a,
+              child: c,
+            ),
+          );
         }
         return null;
-        return PageRouteBuilder(
-            settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
-            pageBuilder: (_, __, ___) => UnknownPage(),
-            transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c));
+        // return PageRouteBuilder(
+        //   settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
+        //   pageBuilder: (_, __, ___) => const UnknownPage(),
+        //   transitionsBuilder: (_, a, __, c) => FadeTransition(
+        //     opacity: a,
+        //     child: c,
+        //   ),
+        // );
       },
       onUnknownRoute: (settings) {
         debugPrint("[onUnknownRoute] settings.arguments ${settings.arguments}");
