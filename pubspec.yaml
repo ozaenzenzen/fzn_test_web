@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: 
+  responsive_mpa_web:
+    path: ../responsive_mpa_web
 
 dev_dependencies:
 
@@ -42,8 +44,6 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  fzn_responsive_web:
-    path: ../fzn_responsive_web
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
