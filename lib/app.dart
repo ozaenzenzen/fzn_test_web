@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fzn_test_web/helper/fade_route.dart';
 import 'package:fzn_test_web/page/home_page.dart';
 import 'package:fzn_test_web/page/second_page.dart';
+import 'package:fzn_test_web/page/third_page.dart';
 import 'package:fzn_test_web/page/unknown_page.dart';
+import 'package:responsive_mpa_web/responsive_mpa_web.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -15,7 +18,54 @@ class MyApp extends StatelessWidget {
     // );
     return MaterialApp(
       title: 'Flutter Demo',
-      home: const HomePage(),
+      // home: const HomePage(),
+      home: ResponsiveMPAWeb(
+        listMenu: [
+          AppBarMenuButton(
+            menuText: const Text("Menu 1"),
+            // currentIndex: 1,
+            indexPage: 1,
+            onTap: (context) {
+              Navigator.push(
+                context,
+                FadeInRoute(
+                  page: const HomePage(),
+                  routeName: '/home',
+                ),
+              );
+            },
+          ),
+          AppBarMenuButton(
+            menuText: const Text("Menu 2"),
+            // currentIndex: 2,
+            indexPage: 2,
+            onTap: (context) {
+              Navigator.push(
+                context,
+                FadeInRoute(
+                  page: const SecondPage(),
+                  routeName: '/secondpage',
+                ),
+              );
+            },
+          ),
+          AppBarMenuButton(
+            menuText: const Text("Menu 3"),
+            // currentIndex: 3,
+            indexPage: 3,
+            onTap: (context) {
+              Navigator.push(
+                context,
+                FadeInRoute(
+                  page: const ThirdPage(),
+                  routeName: '/thirdpage',
+                ),
+              );
+            },
+          ),
+        ],
+        child: const HomePage(),
+      ),
       onGenerateRoute: (settings) {
         debugPrint("[onGenerateRoute] settings name ${settings.name}");
         if (settings.name == "/home") {
@@ -38,6 +88,16 @@ class MyApp extends StatelessWidget {
             ),
           );
         }
+        if (settings.name == "/thirdpage") {
+          return PageRouteBuilder(
+            settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
+            pageBuilder: (_, __, ___) => const ThirdPage(),
+            transitionsBuilder: (_, a, __, c) => FadeTransition(
+              opacity: a,
+              child: c,
+            ),
+          );
+        }
         return null;
         // return PageRouteBuilder(
         //   settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
@@ -51,14 +111,19 @@ class MyApp extends StatelessWidget {
       onUnknownRoute: (settings) {
         debugPrint("[onUnknownRoute] settings.arguments ${settings.arguments}");
         return PageRouteBuilder(
-            settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
-            pageBuilder: (_, __, ___) => UnknownPage(),
-            transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c));
+          settings: settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
+          pageBuilder: (_, __, ___) => const UnknownPage(),
+          transitionsBuilder: (_, a, __, c) => FadeTransition(
+            opacity: a,
+            child: c,
+          ),
+        );
       },
       initialRoute: '/',
       routes: {
         '/home': (context) => const HomePage(),
         '/secondpage': (context) => const SecondPage(),
+        '/thirdpage': (context) => const ThirdPage(),
         '/404': (context) => const UnknownPage(),
       },
     );

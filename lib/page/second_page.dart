@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fzn_responsive_web/fzn_responsive_web.dart';
-import 'package:fzn_responsive_web/appbar/appbar_menu_button.dart';
-import 'package:fzn_test_web/helper/fade_route.dart';
-import 'package:fzn_test_web/page/home_page.dart';
+import 'package:responsive_mpa_web/responsive_mpa_web.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
@@ -17,74 +14,115 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    List<Widget> listMenu = [
-      AppBarMenuButton(
-        menuText: Text("Menu 1"),
-        currentIndex: currentIndex,
-        pageIndex: 1,
-        onTap: () {
-          Navigator.push(
-            context,
-            FadeInRoute(
-              page: const HomePage(),
-              routeName: '/home',
-            ),
-          );
-        },
-      ),
-      SizedBox(width: 20),
-      AppBarMenuButton(
-        menuText: Text("Menu 2"),
-        currentIndex: currentIndex,
-        pageIndex: 2,
-        onTap: () {
-          Navigator.push(
-            context,
-            FadeInRoute(
-              page: const SecondPage(),
-              routeName: '/secondpage',
-            ),
-          );
-        },
-      ),
-    ];
+    // List<Widget> listMenu = [
+    //   AppBarMenuButton(
+    //     menuText: const Text("Menu 1"),
+    //     currentIndex: currentIndex,
+    //     pageIndex: 1,
+    //     onTap: (context) {
+    //       Navigator.push(
+    //         context,
+    //         FadeInRoute(
+    //           page: const HomePage(),
+    //           routeName: '/home',
+    //         ),
+    //       );
+    //     },
+    //   ),
+    //   const SizedBox(width: 20),
+    //   AppBarMenuButton(
+    //     menuText: const Text("Menu 2"),
+    //     currentIndex: currentIndex,
+    //     pageIndex: 2,
+    //     onTap: (context) {
+    //       Navigator.push(
+    //         context,
+    //         FadeInRoute(
+    //           page: const SecondPage(),
+    //           routeName: '/secondpage',
+    //         ),
+    //       );
+    //     },
+    //   ),
+    //   const SizedBox(width: 20),
+    //   AppBarMenuButton(
+    //     menuText: const Text("Menu 3"),
+    //     currentIndex: currentIndex,
+    //     pageIndex: 3,
+    //     onTap: (context) {
+    //       Navigator.push(
+    //         context,
+    //         FadeInRoute(
+    //           page: const ThirdPage(),
+    //           routeName: '/thirdpage',
+    //         ),
+    //       );
+    //     },
+    //   ),
+    // ];
     return WebPageWidget(
-      pageTitle: "Page Title 2",
-      backgroundDecoration: BoxDecoration(
+      pageTitle: "Second Page",
+      index: 2,
+      backgroundDecoration: const BoxDecoration(
         color: Colors.blueGrey,
       ),
-      fullSizeScaffold: FullSizeScaffoldPage(
-        body: Center(
-          child: Text("Halaman Second"),
+      appBar: AppBarMenu(
+        appBarTitle: const AppBarTitle.text(
+          text: Text("Second Page"),
         ),
-        appBar: AppBarMenu.instance.appBar(
-          currentSpace: width,
-          currentIndex: 1,
-          listMenu: listMenu,
-          context: context,
-          onTapToHomePage: () {},
-        ),
+        // listMenu: listMenu,
+        onTapToHomePage: () {},
       ),
-      halfSizeScaffold: HalfSizeScaffoldPage(
-        body: Center(
-          child: Text("Halaman Second"),
-        ),
-        appBar: AppBarMenu.instance.appBar(
-          currentSpace: width,
-          currentIndex: 1,
-          listMenu: listMenu,
-          context: context,
-          onTapToHomePage: () {},
-          iconColor: Colors.white,
-        ),
-        drawer: Container(
-          width: width * 0.4,
-          color: Colors.blueGrey.shade300,
-          child: ListView(
-            children: listMenu,
-          ),
+      bodyOnFullSize: const Center(
+        child: Text("Halaman Second"),
+      ),
+      bodyOnHalfSize: const Center(
+        child: Text("Halaman Second"),
+      ),
+      drawer: Container(
+        width: width * 0.4,
+        color: Colors.blueGrey.shade300,
+        child: ListView(
+          children: ResponsiveMPAWebConfig.listMenu,
         ),
       ),
     );
+    // return WebPageWidget(
+    //   pageTitle: "Second Page",
+    //   backgroundDecoration: const BoxDecoration(
+    //     color: Colors.blueGrey,
+    //   ),
+    //   fullSizeScaffold: FullSizeScaffoldPage(
+    //     body: const Center(
+    //       child: Text("Halaman Second"),
+    //     ),
+    //     appBar: AppBarMenuV2(
+    //       appBarMenuTitle: const AppBarMenuTitle.text(
+    //         text: Text("Second Page"),
+    //       ),
+    //       listMenu: listMenu,
+    //       onTapToHomePage: () {},
+    //     ),
+    //   ),
+    //   halfSizeScaffold: HalfSizeScaffoldPage(
+    //     body: const Center(
+    //       child: Text("Halaman Second"),
+    //     ),
+    //     appBar: AppBarMenuV2(
+    //       appBarMenuTitle: const AppBarMenuTitle.text(
+    //         text: Text("Second Page"),
+    //       ),
+    //       listMenu: listMenu,
+    //       onTapToHomePage: () {},
+    //     ),
+    //     drawer: Container(
+    //       width: width * 0.4,
+    //       color: Colors.blueGrey.shade300,
+    //       child: ListView(
+    //         children: listMenu,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
