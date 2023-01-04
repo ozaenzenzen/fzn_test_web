@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fzn_test_web/helper/fade_route.dart';
+import 'package:fzn_test_web/helper/route_delegate.dart';
+import 'package:fzn_test_web/helper/route_information_parser.dart';
 import 'package:fzn_test_web/page/home_page.dart';
+import 'package:fzn_test_web/page/home_screen.dart';
 import 'package:fzn_test_web/page/second_page.dart';
 import 'package:fzn_test_web/page/third_page.dart';
 import 'package:fzn_test_web/page/unknown_page.dart';
@@ -12,60 +15,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    debugPrint("TEST MATERIAL APP");
     // return MaterialApp.router(
     //   routeInformationParser: RouteInformationParser(),
     //   routerDelegate: routerDelegate,
     // );
     return MaterialApp(
+      // routeInformationParser: AppRouteInformationParser(),
+      // routerDelegate: AppRouteDelegate(),
       title: 'Flutter Demo',
+      // home: const HomeScreen(),
       // home: const HomePage(),
-      home: ResponsiveMPAWeb(
-        listMenu: [
-          AppBarMenuButton(
-            menuText: const Text("Menu 1"),
-            // currentIndex: 1,
-            indexPage: 1,
-            onTap: (context) {
-              Navigator.push(
-                context,
-                FadeInRoute(
-                  page: const HomePage(),
-                  routeName: '/home',
-                ),
-              );
-            },
-          ),
-          AppBarMenuButton(
-            menuText: const Text("Menu 2"),
-            // currentIndex: 2,
-            indexPage: 2,
-            onTap: (context) {
-              Navigator.push(
-                context,
-                FadeInRoute(
-                  page: const SecondPage(),
-                  routeName: '/secondpage',
-                ),
-              );
-            },
-          ),
-          AppBarMenuButton(
-            menuText: const Text("Menu 3"),
-            // currentIndex: 3,
-            indexPage: 3,
-            onTap: (context) {
-              Navigator.push(
-                context,
-                FadeInRoute(
-                  page: const ThirdPage(),
-                  routeName: '/thirdpage',
-                ),
-              );
-            },
-          ),
-        ],
-        child: const HomePage(),
-      ),
       onGenerateRoute: (settings) {
         debugPrint("[onGenerateRoute] settings name ${settings.name}");
         if (settings.name == "/home") {
@@ -121,7 +81,8 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: '/',
       routes: {
-        '/home': (context) => const HomePage(),
+        '/': (context) => const HomeScreen(),
+        // '/': (context) => const HomePage(),
         '/secondpage': (context) => const SecondPage(),
         '/thirdpage': (context) => const ThirdPage(),
         '/404': (context) => const UnknownPage(),
