@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    debugPrint("TESTING HOME SCREEN");
+    // debugPrint("TESTING HOME SCREEN");
     return WebPageView(
       listMenuBar: <AppBarMenuButton>[
         AppBarMenuButton(
